@@ -13,8 +13,45 @@ public abstract class Statistics
         this.currentValue = currentValue;
     }
 
-    public virtual void AffectStat(float value,float currentValue)
+    public float MaxValue
     {
-        currentValue += value;
+        get { return maxValue; }
+        protected set
+        {
+            if (value < minValue)
+            {
+                Debug.LogError("Max value cannot be less than min value.");
+                return;
+            }
+            maxValue = value;
+        } 
+    }
+
+    public float MinValue
+    {
+        get { return minValue; }
+        protected set
+        {
+            if (value > maxValue)
+            {
+                Debug.LogError("Min value cannot be greater than max value.");
+                return;
+            }
+            minValue = value;
+        } 
+    }
+
+    public float CurrentValue
+    {
+        get { return currentValue; }
+        protected set
+        {
+            if (value < minValue || value > maxValue)
+            {
+                Debug.LogError("Current value must be between min and max values.");
+                return;
+            }
+            currentValue = value;
+        } 
     }
 }
