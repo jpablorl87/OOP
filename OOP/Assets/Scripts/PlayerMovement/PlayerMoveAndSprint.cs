@@ -15,6 +15,7 @@ public class PlayerMoveAndSprint : MonoBehaviour
     private Rigidbody rb;
     private bool isSprinting = false;
     [SerializeField] private Transform cam;
+    private DestinySword skill1;
 
     void Start()
     {
