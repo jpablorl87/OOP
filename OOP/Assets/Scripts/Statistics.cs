@@ -6,6 +6,10 @@ public abstract class Statistics
     private float minValue;
     private float currentValue;
 
+    public Statistics(float maxValue, float minValue, float currentValue, float minValue1, float v, float currentValue1) : this(maxValue, minValue, currentValue)
+    {
+    }
+
     protected Statistics(float maxValue, float minValue, float currentValue)
     {
         this.maxValue = maxValue;

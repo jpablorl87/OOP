@@ -530,7 +530,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Skill1",
                     "isComposite": false,
                     "isPartOfComposite": false

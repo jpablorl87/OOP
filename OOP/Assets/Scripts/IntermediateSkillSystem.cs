@@ -6,13 +6,14 @@ public enum SkillType
     Defense,
     Support
 }
-public abstract class IntermediateSkillSystem : Skill
+public class IntermediateSkillSystem
 {
     protected SkillType skillType {get; set;}
     protected float cost;
-    protected float duration; 
+    protected float duration;
+    protected Skill AutoHealing;
 
-    protected IntermediateSkillSystem(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration) : base(nameSkill, icon, coolDown)
+    protected IntermediateSkillSystem(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration, float maxValue, float minValue, float currentValue)
     {
         this.skillType = skillType;
         this.cost = cost;
