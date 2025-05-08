@@ -9,9 +9,6 @@ public class Skill1 : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     private InputAction skillAction1;
     private IntermediateSkillSystem intermediateSkillSystem;
-    /*public Skill1(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration) : base(nameSkill, icon, coolDown, skillType, cost, duration)
-    {
-    }*/
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -19,7 +16,13 @@ public class Skill1 : MonoBehaviour
     }
     public void DeploySkill(Image icon, float coolDown, SkillType skillType)
     {
-        
+        if (skillAction1.WasPressedThisFrame())
+        {
+            if (intermediateSkillSystem.CanUse() == true)
+            {
+                icon.fillAmount = 0;
+                //intermediateSkillSystem.CurrentValue. = 
+            }
+        }
     }
-
 }

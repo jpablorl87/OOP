@@ -6,22 +6,22 @@ public enum SkillType
     Defense,
     Support
 }
-public abstract class IntermediateSkillSystem : Skill
+public class IntermediateSkillSystem
 {
     protected SkillType skillType {get; set;}
     protected float cost;
-    protected float duration; 
+    protected float duration;
 
-    protected IntermediateSkillSystem(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration) : base(nameSkill, icon, coolDown)
+    protected IntermediateSkillSystem(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration, float maxValue, float minValue, float currentValue) : base(nameSkill, icon, coolDown, maxValue, minValue, currentValue)
     {
         this.skillType = skillType;
         this.cost = cost;
         this.duration = duration;
     }
 
-    public virtual bool CanUse(float currentValue, float cost)
+    public virtual bool CanUse()
     {
-        if (currentValue >= cost)
+        if (CurrentValue >= cost)
         {
             return true; //can use the skill
         }

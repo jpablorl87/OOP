@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Skill
+public abstract class Skill : Statistics
 {
     private string nameSkill;
     private Image icon;
     private float coolDown;
 
-    protected Skill(string nameSkill, Image icon, float coolDown)
+    protected Skill(string nameSkill, Image icon, float coolDown, float maxValue, float minValue, float currentValue) : base(maxValue, minValue, currentValue)
     {
         this.nameSkill = nameSkill;
         this.icon = icon;
