@@ -8,23 +8,22 @@ public enum ManaState
 
 public class ManaSystem : Statistics
 {
-    private float speedRecharge; //this variable is used to define the speed of mana recharge]
+    [SerializeField] private ManaState regenCondition;
+    [SerializeField] private float speedRecharge = 1;
     public ManaSystem(float maxValue, float minValue, float currentValue, float speedRecharge) : base(maxValue, minValue, currentValue)
     {
         this.speedRecharge = speedRecharge;
     }
 
-    public void RechargeMana(float amount, ManaState state)
+    public void Recharge(ManaState state, float amount) 
     {
-        if (state == ManaState.time)
+        if (state == regenCondition)
         {
-            CurrentValue += amount * Time.deltaTime * speedRecharge; //recharge the mana over time
+            ModifyValue(amount * speedRecharge); //multiply the amount by the speed of recharge
         }
-        else if(state == ManaState.instant)
+        else 
         {
-            CurrentValue += amount; //recharge the mana instantly
+            ModifyValue(amount); //just modify the value
         }
-
-        Mathf.Clamp(CurrentValue, MinValue, MaxValue);
     }
 }

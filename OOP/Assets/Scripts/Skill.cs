@@ -1,64 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Skill
+public abstract class Skill : ScriptableObject
 {
-    private string nameSkill;
-    private Image icon;
-    private float coolDown;
+    public event Action OnCompleted;
 
-    protected Skill(string nameSkill, Image icon, float coolDown)
+    [SerializeField] protected string nameSkill;
+    [SerializeField] protected Image icon;
+    [SerializeField] protected float coolDown;
+    protected float currentCooldown; //current cooldown time
+
+
+    public bool isReady => currentCooldown <= 0; //check if the skill is ready to be used
+
+    /// <summary>
+    /// Execute the skill on the player
+    /// </summary>
+    public abstract void Execute(GameObject player); //abstract method to be implemented by derived classes
+
+    public virtual void Update()
     {
-        this.nameSkill = nameSkill;
-        this.icon = icon;
-        this.coolDown = coolDown;
+        CoolDownReset(); //call the cooldown reset method
     }
 
-    public float Cooldown
-    {
-        get { return coolDown; } //read-only property for cooldown
-        set 
-        {
-            if (value >= 0)
-            {
-                coolDown = value;
-            }
-            else
-            {
-                Debug.LogError("Cooldown cannot be negative");
-            }
-        }
-    }
+    protected void RiseOnCompleted() => OnCompleted?.Invoke(); //invoke the OnCompleted
 
-    public string NameSkill
-    {
-        get { return nameSkill; }
-        protected set 
-        {
-            if (!string.IsNullOrEmpty(value))
-            {
-                nameSkill = value;
-            }
-            else
-            {
-                Debug.LogError("Skill name cannot be null or empty");
-            }
-        }
-    }
 
-    public Image IconSkill
+    private void CoolDownReset() 
     {
-        get { return icon; }
-
-        protected set
+        if (currentCooldown > 0)
         {
-            if (value != null)
+            Debug.Log($"Current cooldown: {currentCooldown}");
+            currentCooldown -= Time.deltaTime; //reduce cooldown time
+
+            if (currentCooldown <= 0)
             {
-                icon = value;
-            }
-            else
-            {
-                Debug.LogError("Icon cannot be null");
+                RiseOnCompleted(); //reset cooldown time
             }
         }
     }

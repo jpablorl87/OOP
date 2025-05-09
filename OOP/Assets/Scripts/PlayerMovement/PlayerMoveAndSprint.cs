@@ -15,6 +15,7 @@ public class PlayerMoveAndSprint : MonoBehaviour
     private Rigidbody rb;
     private bool isSprinting = false;
     [SerializeField] private Transform cam;
+    private DestinySword skill1;
 
     void Start()
     {
@@ -44,9 +45,11 @@ public class PlayerMoveAndSprint : MonoBehaviour
         rb.MovePosition(rb.position + transform.forward * inputM.y * currentSpeed * Time.fixedDeltaTime);
         rb.MovePosition(rb.position + transform.right * inputM.x * currentSpeed * Time.fixedDeltaTime);
 
-        float rotationAmount = (inputR.x + cam.transform.rotation.y) * rotateSpeed * Time.fixedDeltaTime;
-        Quaternion deltaR = Quaternion.Euler(0, rotationAmount, 0);
-        rb.MoveRotation(rb.rotation * deltaR);
+        var dir = cam.transform.forward;
+
+        dir.y = 0;
+
+        transform.forward = dir;
     }
 
     void OnDestroy()
