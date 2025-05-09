@@ -26,7 +26,7 @@ public class HealingZone : MonoBehaviour
 
             if (healTimer >= healInterval)
             {
-                player.lifeSystem.RechargeLife(healAmount);
+                player.lifeSystem.Heal(healAmount);
                 healTimer = 0f;
                  Debug.Log("Curando al jugador"); 
             }

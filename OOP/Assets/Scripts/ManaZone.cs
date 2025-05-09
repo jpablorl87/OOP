@@ -28,7 +28,7 @@ public class ManaZone : MonoBehaviour
             if (rechargeType == ManaState.time || manaTimer >= manaInterval)
             Debug.Log("Maná actual del jugador: " + player.manaSystem.CurrentValue);
             {
-                player.manaSystem.RechargeMana(manaAmount, rechargeType);
+                player.manaSystem.Recharge(rechargeType, manaAmount);
 
                 if (rechargeType == ManaState.instant)
                     manaTimer = 0f; 
