@@ -23,25 +23,32 @@ public class IntermediateSkillSystem : MonoBehaviour
     private GameObject player;
     private Skill currentSkill;
 
+
+    /// <summary>
+    /// Inicializa el sistema de habilidades y asigna las acciones de entrada a las habilidades correspondientes.
+    /// </summary>
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         foreach (var slot in skills) 
         {
-            if (slot.inputAction != null) 
+            if (slot.inputAction != null && slot.skill != null) 
             {
-                slot.inputAction.action.performed += _ => TryUseSkill(slot.skill);
-                slot.inputAction.action.Enable();
+                var currentSlot = slot; // Capture the current slot in a local variable
+                currentSlot.inputAction.action.performed += _ => TryUseSkill(slot.skill);
+                currentSlot.inputAction.action.Enable();
             }
         }
     }
 
     private void Update()
     {
-        currentSkill?.Update(); // Update the current skill if it's not null
+        foreach (var slot in skills)
+        {
+            slot.skill.Update(); // Update each skill          
+        }
     }
-
 
     private void TryUseSkill(Skill skill) 
     {
@@ -50,8 +57,9 @@ public class IntermediateSkillSystem : MonoBehaviour
         if (skill.isReady) 
         {
             currentSkill = skill; // Set the current skill to the one being used
-            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event
             currentSkill.Execute(player); // Execute the skill
+            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event
+            
             
         }
     }

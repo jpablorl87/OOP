@@ -14,7 +14,7 @@ public class Dash : Skill
         {
             Vector3 direction = player.transform.forward;
             rb.AddForce(direction * dashForce, ForceMode.Impulse);
-            RiseOnCompleted();
+            currentCooldown = coolDown; // Set the cooldown time
         }
     }
 }

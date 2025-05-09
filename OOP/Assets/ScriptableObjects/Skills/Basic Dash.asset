@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameSkill: 
   icon: {fileID: 0}
-  coolDown: 0
-  dashForce: 10
+  coolDown: 5
+  dashForce: 5
