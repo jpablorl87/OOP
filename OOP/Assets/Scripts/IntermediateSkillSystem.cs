@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public enum SkillType
 {
@@ -6,30 +10,63 @@ public enum SkillType
     Defense,
     Support
 }
-public class IntermediateSkillSystem
+public class IntermediateSkillSystem : MonoBehaviour
 {
-    protected SkillType skillType {get; set;}
-    protected float cost;
-    protected float duration;
-    protected Skill AutoHealing;
-
-    protected IntermediateSkillSystem(string nameSkill, Image icon, float coolDown, SkillType skillType, float cost, float duration, float maxValue, float minValue, float currentValue)
+    [System.Serializable]
+    public class SkillSlot 
     {
-        this.skillType = skillType;
-        this.cost = cost;
-        this.duration = duration;
+        public InputActionReference inputAction;
+        public Skill skill;
+    }
+   
+    public List<SkillSlot> skills = new List<SkillSlot>();
+    private GameObject player;
+    private Skill currentSkill;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        foreach (var slot in skills) 
+        {
+            if (slot.inputAction != null) 
+            {
+                slot.inputAction.action.performed += _ => TryUseSkill(slot.skill);
+                slot.inputAction.action.Enable();
+            }
+        }
     }
 
-    public virtual bool CanUse(float currentValue, float cost)
+    private void Update()
     {
-        if (currentValue >= cost)
+        currentSkill?.Update(); // Update the current skill if it's not null
+    }
+
+
+    private void TryUseSkill(Skill skill) 
+    {
+        if (currentSkill != null) return; // Check if the skill is null
+
+        if (skill.isReady) 
         {
-            return true; //can use the skill
+            currentSkill = skill; // Set the current skill to the one being used
+            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event
+            currentSkill.Execute(player); // Execute the skill
+            
         }
-        else
+    }
+
+    private void ResetCurrentSkill() 
+    {
+        currentSkill.OnCompleted -= ResetCurrentSkill; // Unsubscribe from the event
+        currentSkill = null; // Reset the current skill
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var slot in skills)
         {
-            Debug.Log("Not enough resources to use the skill!");
-            return false; //cannot use the skill
+            slot.inputAction.action.Dispose();
         }
     }
 }

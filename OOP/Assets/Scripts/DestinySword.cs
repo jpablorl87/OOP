@@ -6,12 +6,12 @@ public class DestinySword : Skill
     private float cost;
     private float mana;
     private float damage;
-    public DestinySword(string nameSkill, Image icon, float coolDown, float cost, float mana, float damage) : base(nameSkill, icon, coolDown)
+
+    public override void Execute(GameObject player)
     {
-        this.cost = cost;
-        this.mana = mana;
-        this.damage = damage;
+        Debug.Log("Execute attack");
     }
+
     public void Swordzazo()
     {
         mana -= cost;

@@ -5,11 +5,11 @@ public class AutoShield : Skill
 {
     private float cost;
     private float mana;
-    public AutoShield(string nameSkill, Image icon, float coolDown, float cost, float mana) : base(nameSkill, icon, coolDown)
+    public override void Execute(GameObject player)
     {
-        this.cost = cost;
-        this.mana = mana;
+        throw new System.NotImplementedException();
     }
+
     public void Shield()
     {
         mana -= cost;

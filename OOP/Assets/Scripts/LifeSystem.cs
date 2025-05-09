@@ -8,29 +8,13 @@ public class LifeSystem : Statistics
 
     }
 
-    //this method is used to spend life points
-    public void UseLife(float amount)
+    public void TakeDamage(float amount)
     {
-        if (CurrentValue - amount >= MinValue)
-        {
-            CurrentValue -= amount;
-        }
-        else
-        {
-            Debug.Log("Not enough life points!");
-        }
+        ModifyValue(-amount); //subtract the damage amount from the current value
     }
 
-    //this method is used to recharge life points
-    public void RechargeLife(float amount)
+    public void Heal(float amount)
     {
-        if (CurrentValue + amount <= MaxValue)
-        {
-            CurrentValue += amount;
-        }
-        else
-        {
-            Debug.Log("Life points are full!");
-        }
+        ModifyValue(amount); //add the healing amount to the current value
     }
 }
