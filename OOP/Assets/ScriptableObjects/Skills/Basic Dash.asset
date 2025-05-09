@@ -15,4 +15,5 @@ MonoBehaviour:
   nameSkill: 
   icon: {fileID: 0}
   coolDown: 5
+  cost: 20
   dashForce: 5

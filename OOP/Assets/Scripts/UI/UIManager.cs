@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction sprint;
 
+
+    [SerializeField] private Player player;
     [SerializeField] private Image skill;
     [SerializeField] private float coolDown;
     [SerializeField] private float skillValue;
@@ -29,21 +31,27 @@ public class UIManager : MonoBehaviour
         lifeValue = maxLife;
         manaValue = maxMana;
         skillValue = coolDown;
+        manaBar.fillAmount = player.GetManaPercentage();
+        Debug.Log($"[manaDebugger] mana fill amount : {player.GetManaPercentage()}");
     }
-    void Update()
+
+    private void OnEnable()
     {
-        skillValue = Mathf.Clamp(skillValue, 0, coolDown);
-        if (sprint.WasPressedThisFrame() && skillValue == coolDown)
-        {
-            manaValue -= cost;
-            manaBar.fillAmount = manaValue / maxMana;
-            skillValue = 0;
-            skill.fillAmount = skillValue / coolDown;
-        }
-        if (skillValue < coolDown)
-        {
-            skill.fillAmount = Mathf.MoveTowards(skill.fillAmount, coolDown, Time.deltaTime);
-            skillValue += Time.deltaTime;
-        }
+        player.OnSpendMana += UpdateManaView;
     }
+
+    private void OnDisable()
+    {
+       player.OnSpendMana -= UpdateManaView;
+    }
+
+    void UpdateManaView(float amount) 
+    {
+        Debug.Log($"[manaDebugger] UpdateManaView : {amount}");
+        manaBar.fillAmount = player.GetManaPercentage();
+    }
+    
+    //falta update life view
+    
+    //falta update skills view
 }

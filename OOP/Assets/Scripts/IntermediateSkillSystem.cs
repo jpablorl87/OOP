@@ -20,8 +20,9 @@ public class IntermediateSkillSystem : MonoBehaviour
     }
    
     public List<SkillSlot> skills = new List<SkillSlot>();
-    private GameObject player;
+    private GameObject playerGO;
     private Skill currentSkill;
+    private Player player;
 
 
     /// <summary>
@@ -29,7 +30,8 @@ public class IntermediateSkillSystem : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        player = playerGO.GetComponent<Player>();
 
         foreach (var slot in skills) 
         {
@@ -57,10 +59,13 @@ public class IntermediateSkillSystem : MonoBehaviour
         if (skill.isReady) 
         {
             currentSkill = skill; // Set the current skill to the one being used
-            currentSkill.Execute(player); // Execute the skill
-            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event
-            
-            
+            if (currentSkill.cost > player.manaSystem.CurrentMana)
+            {
+                return;
+            }
+            player.UpdateStatisticMana(currentSkill.cost);
+            currentSkill.Execute(playerGO, player); // Execute the skill
+            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event     
         }
     }
 

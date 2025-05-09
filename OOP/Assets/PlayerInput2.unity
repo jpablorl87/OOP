@@ -627,6 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075e3e7e72673f14ebc3314b60e20531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1034994070}
   skill: {fileID: 1940273428}
   coolDown: 5
   skillValue: 0
@@ -639,6 +640,33 @@ MonoBehaviour:
   maxMana: 100
   manaValue: 0
   currentMana: 0
+--- !u!114 &1034994070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034994061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56dc43e2844c1a42911149e362949ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1034994071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034994061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f216da5e56c4b44abda024c40efa49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - inputAction: {fileID: 8349483441600370829, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    skill: {fileID: 11400000, guid: eece12ba9f294a04b92e12a95961b7fa, type: 2}
 --- !u!1 &1055519819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,12 +1399,36 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1254310480}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
+      value: c2287ef4-2456-46e8-a2ce-2df1c301d09a
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: e7f7b748-5bd6-4b2b-83d9-b2102d2f3e86
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
+      value: 'UI/Skill1[/Keyboard/q]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: 'Movement/Dash[/Keyboard/e]'
+      objectReference: {fileID: 0}
     - target: {fileID: 2216775563658487090, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1254310481}
     - target: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8742819669706282616, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
@@ -1426,6 +1478,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1034994069}
+    - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1034994070}
+    - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1034994071}
   m_SourcePrefab: {fileID: 100100000, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
