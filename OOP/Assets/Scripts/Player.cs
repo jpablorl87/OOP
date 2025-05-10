@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
     public LifeSystem lifeSystem;
     public ManaSystem manaSystem;
     public Action<float> OnSpendMana; 
-    //falta OnSpendLife
+    public Action<float> OnSpendLife;
+    public Action<float> OnUseSkill;
+    
 
     private void Awake()
     {
@@ -22,8 +24,13 @@ public class Player : MonoBehaviour
     {
        return manaSystem.CurrentMana / manaSystem.MaxValue;
     }
+
+    public float GetlifePercentage()
+    {
+        return lifeSystem.CurrentValue / lifeSystem.MaxValue;
+    }
     
-    //Falta GetlifePercentage
+    
 
     public void UpdateStatisticMana(int amount)
     {
@@ -32,5 +39,27 @@ public class Player : MonoBehaviour
         OnSpendMana?.Invoke(manaSystem.CurrentMana);
     }
     
-    //Falta UpdateStatisticsLife
+    public void UpdateStatisticLife(int amount)
+    {
+        if (amount < 0)
+        {
+            lifeSystem.TakeDamage(Mathf.Abs(amount));
+            Debug.Log($"Recibido daño: {-amount}. Vida actual: {lifeSystem.CurrentValue}");
+        }
+        else if (amount > 0)
+        {
+            lifeSystem.Heal(amount);
+            Debug.Log($"Recuperado: {amount} vida. Vida actual: {lifeSystem.CurrentValue}");
+        }
+
+        OnSpendLife?.Invoke(lifeSystem.CurrentValue);
+    }
+    public void NotifySkillUsed(float cooldown)
+    {
+        Debug.Log($"[skillDebugger] Player notifica skill con cooldown: {cooldown}");
+        OnUseSkill?.Invoke(cooldown);
+    }
+
+   
+
 }

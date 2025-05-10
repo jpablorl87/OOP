@@ -41,4 +41,9 @@ public abstract class Skill : ScriptableObject
             }
         }
     }
+
+    protected void StartCooldown()
+    {
+        currentCooldown = coolDown; // Reinicia el cooldown
+    }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,11 +39,15 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         player.OnSpendMana += UpdateManaView;
+        player.OnSpendLife += UpdateLifeView; 
+        player.OnUseSkill += UpdateSkillView;
     }
 
     private void OnDisable()
     {
        player.OnSpendMana -= UpdateManaView;
+       player.OnSpendLife -= UpdateLifeView;
+       player.OnUseSkill -= UpdateSkillView;
     }
 
     void UpdateManaView(float amount) 
@@ -51,7 +56,28 @@ public class UIManager : MonoBehaviour
         manaBar.fillAmount = player.GetManaPercentage();
     }
     
-    //falta update life view
+    void UpdateLifeView(float amount)
+{
+    Debug.Log($"[lifeDebugger] UpdateLifeView : {amount}");
+    lifeBar.fillAmount = player.GetlifePercentage();
+}
+
+public void UpdateSkillView(float cooldownTime) 
+{
+    Debug.Log($"[skillDebugger] UpdateSkillView : {cooldownTime}");
+    StartCoroutine(SkillCooldownRoutine(skill, cooldownTime));
+}
+
+private IEnumerator SkillCooldownRoutine(Image icon, float duration) 
+{
+    float elapsed = 0f;
+    while (elapsed < duration)
+    {
+        skill.fillAmount = 1f - (elapsed / duration);
+        elapsed += Time.deltaTime;
+        yield return null;
+    }
+    skill.fillAmount = 1f;
+}
     
-    //falta update skills view
 }

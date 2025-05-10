@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1034994070}
-  skill: {fileID: 1940273428}
+  skill: {fileID: 0}
   coolDown: 5
   skillValue: 0
   cost: 20
@@ -1401,7 +1401,7 @@ PrefabInstance:
       objectReference: {fileID: 1254310480}
     - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionId
@@ -1412,12 +1412,20 @@ PrefabInstance:
       value: e7f7b748-5bd6-4b2b-83d9-b2102d2f3e86
       objectReference: {fileID: 0}
     - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 63aff6a2-48a9-450e-8584-8dda09c097f0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionName
       value: 'UI/Skill1[/Keyboard/q]'
       objectReference: {fileID: 0}
     - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_ActionEvents.Array.data[15].m_ActionName
       value: 'Movement/Dash[/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029013575814621465, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: 'Movement/UseSkill1[/Keyboard/q]'
       objectReference: {fileID: 0}
     - target: {fileID: 2216775563658487090, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: cam
