@@ -4,46 +4,64 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Player Reference")]
-    [SerializeField] private Player player;
 
     [Header("UI Elements")]
     [SerializeField] private Image lifeBar;
     [SerializeField] private Image manaBar;
 
+    private Player currentPlayer;
+
     private void Start()
     {
+        // Buscar por tag en lugar de por tipo
+        GameObject playerObj = GameObject.FindGameObjectWithTag("MainPlayer");
+
+        if (playerObj != null)
+        {
+            currentPlayer = playerObj.GetComponent<Player>();
+
+            // Verificar tipo concreto
+            if (currentPlayer == null)
+            {
+                Debug.LogError("El jugador no tiene un componente Player válido");
+                return;
+            }
+        }
+
         InitializeUI();
+        SetupEventListeners(); // Nueva función
     }
 
     private void InitializeUI()
     {
-        lifeBar.fillAmount = player.GetlifePercentage();
-        manaBar.fillAmount = player.GetManaPercentage();
+        if (currentPlayer == null) return;
+        lifeBar.fillAmount = currentPlayer.GetlifePercentage();
+        manaBar.fillAmount = currentPlayer.GetManaPercentage();
     }
 
-    private void OnEnable()
+    private void SetupEventListeners()
     {
-        player.OnSpendMana += UpdateManaView;
-        player.OnSpendLife += UpdateLifeView;
-        player.OnUseSkill += UpdateSkillView;
-    }
+        if (currentPlayer == null) return;
 
-    private void OnDisable()
-    {
-        player.OnSpendMana -= UpdateManaView;
-        player.OnSpendLife -= UpdateLifeView;
-        player.OnUseSkill -= UpdateSkillView;
+        // Limpiar suscripciones previas
+        currentPlayer.OnSpendMana -= UpdateManaView;
+        currentPlayer.OnSpendLife -= UpdateLifeView;
+        currentPlayer.OnUseSkill -= UpdateSkillView;
+
+        // Suscribir eventos
+        currentPlayer.OnSpendMana += UpdateManaView;
+        currentPlayer.OnSpendLife += UpdateLifeView;
+        currentPlayer.OnUseSkill += UpdateSkillView;
     }
 
     private void UpdateManaView(float amount)
     {
-        manaBar.fillAmount = player.GetManaPercentage();
+        manaBar.fillAmount = currentPlayer.GetManaPercentage();
     }
 
     private void UpdateLifeView(float amount)
     {
-        lifeBar.fillAmount = player.GetlifePercentage();
+        lifeBar.fillAmount = currentPlayer.GetlifePercentage();
     }
 
     public void UpdateSkillView(float cooldownTime, Image targetIcon)

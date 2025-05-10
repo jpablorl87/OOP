@@ -15,18 +15,17 @@ public class IntermediateSkillSystem : MonoBehaviour
 
     [SerializeField] private List<SkillSlot> skills = new List<SkillSlot>();
 
-    private Player player;
+    [Header("Configuración de Jugadores")]
+    //[SerializeField] private bool testingMode;
+    [SerializeField] private Player currentPlayer;
+
+    //private Player player;
     private Skill currentSkill;
 
     private void Start()
     {
-        InitializePlayer();
+        DetectCurrentPlayer();
         SetupSkillInputs();
-    }
-
-    private void InitializePlayer()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void SetupSkillInputs()
@@ -41,17 +40,44 @@ public class IntermediateSkillSystem : MonoBehaviour
         }
     }
 
+
+    /// Detecta el jugador actual en la escena
+    private void DetectCurrentPlayer()
+    {
+        currentPlayer = Object.FindFirstObjectByType<ManaCostPlayer>() ?? (Player)FindFirstObjectByType<HealthCostPlayer>();
+
+        if (currentPlayer == null)
+            Debug.LogError("Agrega un jugador a la escena");
+    }
+
     private void TryUseSkill(SkillSlot slot)
     {
         if (currentSkill != null || !slot.skill.isReady) return;
 
-        if (slot.skill.cost <= player.manaSystem.CurrentMana)
+        // Verificación de costos específica para cada jugador
+        bool canUseSkill = false;
+
+        if (currentPlayer is HealthCostPlayer)
+        {
+            canUseSkill = slot.skill.cost <= currentPlayer._lifeSystem.CurrentValue;
+        }
+        else if (currentPlayer is ManaCostPlayer)
+        {
+            canUseSkill = slot.skill.cost <= currentPlayer._manaSystem.CurrentMana;
+        }
+        else
+        {
+            canUseSkill = false;
+        }
+
+
+        if (canUseSkill)
         {
             currentSkill = slot.skill;
-            player.UpdateStatisticMana(slot.skill.cost);
-            slot.skill.Execute(player.gameObject, player);// ejecuta la habilidad
-            player.NotifySkillUsed(slot.skill.coolDown, slot.uiIcon);
-            currentSkill.OnCompleted += ResetCurrentSkill;// asigna el evento de cooldown
+            currentPlayer.ApplySkillCost(slot.skill.cost);
+            slot.skill.Execute(currentPlayer.gameObject, currentPlayer);
+            currentPlayer.NotifySkillUsed(slot.skill.coolDown, slot.uiIcon);
+            currentSkill.OnCompleted += ResetCurrentSkill;
         }
     }
 

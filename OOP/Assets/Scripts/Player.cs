@@ -2,45 +2,26 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
-    public LifeSystem lifeSystem;
-    public ManaSystem manaSystem;
+    public LifeSystem _lifeSystem;
+    public ManaSystem _manaSystem;
 
     //Se crean los eventos para que el UIManager pueda subscribirse o escucharlos
     public Action<float> OnSpendMana;
     public Action<float> OnSpendLife;
     public Action<float, Image> OnUseSkill;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        InitializeSystems();
+         _lifeSystem = new LifeSystem(100f, 0f, 100f);
+         _manaSystem = new ManaSystem(100f, 0f, 100f, 5f);
+        
     }
 
-    /// Se inicializan los sistemas de vida y mana :b
-    private void InitializeSystems()
-    {
-        lifeSystem = new LifeSystem(100f, 0f, 100f);
-        manaSystem = new ManaSystem(100f, 0f, 100f, 5f);
-    }
-
-    
-    public float GetManaPercentage() => manaSystem.CurrentMana / manaSystem.MaxValue;
-    public float GetlifePercentage() => lifeSystem.CurrentValue / lifeSystem.MaxValue;
-
-    public void UpdateStatisticMana(int amount)
-    {
-        manaSystem.SpendMana(amount);
-        OnSpendMana?.Invoke(manaSystem.CurrentMana);//invoca el evento de gasto de mana
-    }
-
-    public void UpdateStatisticLife(int amount)//invoca el evento de gasto de vida
-    {
-        if (amount < 0) lifeSystem.TakeDamage(Mathf.Abs(amount));
-        else if (amount > 0) lifeSystem.Heal(amount);
-
-        OnSpendLife?.Invoke(lifeSystem.CurrentValue);
-    }
+    public abstract void ApplySkillCost(int cost);
+    public virtual float GetManaPercentage() => _manaSystem.CurrentMana /_manaSystem.MaxValue;//se obtiene el porcentaje de mana actual en funcion del maximo de mana
+    public virtual float GetlifePercentage() => _lifeSystem.CurrentValue / _lifeSystem.MaxValue;
 
     public void NotifySkillUsed(float cooldown, Image targetIcon)//invoca el evento de uso de habilidad
     {
