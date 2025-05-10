@@ -1,83 +1,71 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private InputAction sprint;
-
-
+    [Header("Player Reference")]
     [SerializeField] private Player player;
-    [SerializeField] private Image skill;
-    [SerializeField] private float coolDown;
-    [SerializeField] private float skillValue;
-    [SerializeField] private float cost;
 
+    [Header("UI Elements")]
     [SerializeField] private Image lifeBar;
     [SerializeField] private Image manaBar;
 
-    [SerializeField] private float maxLife;
-    [SerializeField] private float lifeValue;
-    [SerializeField] private float currentLife;
-    [SerializeField] private float maxMana;
-    [SerializeField] private float manaValue;
-    [SerializeField] private float currentMana;
-    void Start()
+    private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        sprint = playerInput.actions.FindAction("Sprint");
+        InitializeUI();
+    }
 
-        lifeValue = maxLife;
-        manaValue = maxMana;
-        skillValue = coolDown;
+    private void InitializeUI()
+    {
+        lifeBar.fillAmount = player.GetlifePercentage();
         manaBar.fillAmount = player.GetManaPercentage();
-        Debug.Log($"[manaDebugger] mana fill amount : {player.GetManaPercentage()}");
     }
 
     private void OnEnable()
     {
         player.OnSpendMana += UpdateManaView;
-        player.OnSpendLife += UpdateLifeView; 
+        player.OnSpendLife += UpdateLifeView;
         player.OnUseSkill += UpdateSkillView;
     }
 
     private void OnDisable()
     {
-       player.OnSpendMana -= UpdateManaView;
-       player.OnSpendLife -= UpdateLifeView;
-       player.OnUseSkill -= UpdateSkillView;
+        player.OnSpendMana -= UpdateManaView;
+        player.OnSpendLife -= UpdateLifeView;
+        player.OnUseSkill -= UpdateSkillView;
     }
 
-    void UpdateManaView(float amount) 
+    private void UpdateManaView(float amount)
     {
-        Debug.Log($"[manaDebugger] UpdateManaView : {amount}");
         manaBar.fillAmount = player.GetManaPercentage();
     }
-    
-    void UpdateLifeView(float amount)
-{
-    Debug.Log($"[lifeDebugger] UpdateLifeView : {amount}");
-    lifeBar.fillAmount = player.GetlifePercentage();
-}
 
-public void UpdateSkillView(float cooldownTime) 
-{
-    Debug.Log($"[skillDebugger] UpdateSkillView : {cooldownTime}");
-    StartCoroutine(SkillCooldownRoutine(skill, cooldownTime));
-}
-
-private IEnumerator SkillCooldownRoutine(Image icon, float duration) 
-{
-    float elapsed = 0f;
-    while (elapsed < duration)
+    private void UpdateLifeView(float amount)
     {
-        skill.fillAmount = 1f - (elapsed / duration);
-        elapsed += Time.deltaTime;
-        yield return null;
+        lifeBar.fillAmount = player.GetlifePercentage();
     }
-    skill.fillAmount = 1f;
-}
-    
+
+    public void UpdateSkillView(float cooldownTime, Image targetIcon)
+    {
+        if (targetIcon != null && cooldownTime > 0)
+        {
+            StartCoroutine(SkillCooldownRoutine(targetIcon, cooldownTime));
+        }
+    }
+
+    private IEnumerator SkillCooldownRoutine(Image icon, float duration)
+    {
+        icon.fillAmount = 0f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            icon.fillAmount = Mathf.Clamp01(elapsed / duration);//se actualiza el valor de la barra en funcion del tiempo
+            elapsed += Time.deltaTime;// se suma el tiempo transcurrido
+            yield return null;
+        }
+
+        icon.fillAmount = 1f;
+    }
 }

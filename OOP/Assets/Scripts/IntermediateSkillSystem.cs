@@ -1,85 +1,80 @@
-using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-public enum SkillType
-{
-    Attack,
-    Defense,
-    Support
-}
+
 public class IntermediateSkillSystem : MonoBehaviour
 {
     [System.Serializable]
-    public class SkillSlot 
+    public class SkillSlot
     {
         public InputActionReference inputAction;
         public Skill skill;
+        public Image uiIcon;
     }
-   
-    public List<SkillSlot> skills = new List<SkillSlot>();
-    private GameObject playerGO;
-    private Skill currentSkill;
+
+    [SerializeField] private List<SkillSlot> skills = new List<SkillSlot>();
+
     private Player player;
+    private Skill currentSkill;
 
-
-    /// <summary>
-    /// Inicializa el sistema de habilidades y asigna las acciones de entrada a las habilidades correspondientes.
-    /// </summary>
     private void Start()
     {
-        playerGO = GameObject.FindGameObjectWithTag("Player");
-        player = playerGO.GetComponent<Player>();
+        InitializePlayer();
+        SetupSkillInputs();
+    }
 
-        foreach (var slot in skills) 
+    private void InitializePlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void SetupSkillInputs()
+    {
+        foreach (var slot in skills)
         {
-            if (slot.inputAction != null && slot.skill != null) 
+            if (slot.inputAction != null && slot.skill != null)
             {
-                var currentSlot = slot; // Capture the current slot in a local variable
-                currentSlot.inputAction.action.performed += _ => TryUseSkill(slot.skill);
-                currentSlot.inputAction.action.Enable();
+                slot.inputAction.action.performed += _ => TryUseSkill(slot);// asigna el evento de la habilidad al input
+                slot.inputAction.action.Enable();
             }
         }
+    }
+
+    private void TryUseSkill(SkillSlot slot)
+    {
+        if (currentSkill != null || !slot.skill.isReady) return;
+
+        if (slot.skill.cost <= player.manaSystem.CurrentMana)
+        {
+            currentSkill = slot.skill;
+            player.UpdateStatisticMana(slot.skill.cost);
+            slot.skill.Execute(player.gameObject, player);// ejecuta la habilidad
+            player.NotifySkillUsed(slot.skill.coolDown, slot.uiIcon);
+            currentSkill.OnCompleted += ResetCurrentSkill;// asigna el evento de cooldown
+        }
+    }
+
+    /// Resetea la habilidad actual cuando termina el cooldown
+    private void ResetCurrentSkill()
+    {
+        currentSkill.OnCompleted -= ResetCurrentSkill;
+        currentSkill = null;
     }
 
     private void Update()
     {
         foreach (var slot in skills)
         {
-            slot.skill.Update(); // Update each skill          
+            slot.skill.Update();
         }
-    }
-
-    private void TryUseSkill(Skill skill) 
-    {
-        if (currentSkill != null) return; // Check if the skill is null
-
-        if (skill.isReady) 
-        {
-            currentSkill = skill; // Set the current skill to the one being used
-            if (currentSkill.cost > player.manaSystem.CurrentMana)
-            {
-                return;
-            }
-            player.UpdateStatisticMana(currentSkill.cost);
-            currentSkill.Execute(playerGO, player); // Execute the skill
-            currentSkill.OnCompleted += ResetCurrentSkill; // Subscribe to the OnCompleted event     
-        }
-    }
-
-    private void ResetCurrentSkill() 
-    {
-        currentSkill.OnCompleted -= ResetCurrentSkill; // Unsubscribe from the event
-        currentSkill = null; // Reset the current skill
     }
 
     private void OnDestroy()
     {
         foreach (var slot in skills)
         {
-            slot.inputAction.action.Dispose();
+            slot.inputAction?.action.Dispose();
         }
     }
 }
