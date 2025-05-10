@@ -5,16 +5,22 @@ using UnityEngine;
 public class Dash : Skill
 {
     [SerializeField] private float dashForce = 10f;
-    public override void Execute(GameObject player)
+    public override void Execute(GameObject player, Player playerClass)
     {
         if (!isReady) return;
+        
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+            if (rb != null) 
+            {
+                
+                Debug.Log("[manaDebugger] Execute called");
+                Vector3 direction = player.transform.forward;
+                rb.AddForce(direction * dashForce, ForceMode.Impulse);
 
-        Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (rb != null) 
-        {
-            Vector3 direction = player.transform.forward;
-            rb.AddForce(direction * dashForce, ForceMode.Impulse);
-            currentCooldown = coolDown; // Set the cooldown time
-        }
+                currentCooldown = coolDown; // Set the cooldown time
+            
+            }  
+       
+            
     }
 }

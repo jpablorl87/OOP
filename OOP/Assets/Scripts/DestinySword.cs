@@ -7,9 +7,9 @@ public class DestinySword : Skill
     private float mana;
     private float damage;
 
-    public override void Execute(GameObject player)
+    public override void Execute(GameObject player, Player playerClass)
     {
-        Debug.Log("Execute attack");
+        throw new System.NotImplementedException();
     }
 
     public void Swordzazo()

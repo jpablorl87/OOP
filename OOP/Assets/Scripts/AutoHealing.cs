@@ -8,7 +8,7 @@ public class AutoHealing : Skill
     private float recharge;
     private float cost;
 
-    public override void Execute(GameObject player)
+    public override void Execute(GameObject player, Player playerClass)
     {
         throw new System.NotImplementedException();
     }

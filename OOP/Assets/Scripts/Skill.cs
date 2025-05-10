@@ -9,6 +9,7 @@ public abstract class Skill : ScriptableObject
     [SerializeField] protected string nameSkill;
     [SerializeField] protected Image icon;
     [SerializeField] protected float coolDown;
+    [SerializeField] public int cost;
     protected float currentCooldown; //current cooldown time
 
 
@@ -17,7 +18,7 @@ public abstract class Skill : ScriptableObject
     /// <summary>
     /// Execute the skill on the player
     /// </summary>
-    public abstract void Execute(GameObject player); //abstract method to be implemented by derived classes
+    public abstract void Execute(GameObject player, Player playerClass); //abstract method to be implemented by derived classes
 
     public virtual void Update()
     {

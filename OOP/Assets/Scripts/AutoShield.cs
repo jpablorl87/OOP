@@ -5,7 +5,9 @@ public class AutoShield : Skill
 {
     private float cost;
     private float mana;
-    public override void Execute(GameObject player)
+ 
+
+    public override void Execute(GameObject player, Player playerClass)
     {
         throw new System.NotImplementedException();
     }

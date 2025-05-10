@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +17,6 @@ public class PlayerMoveAndSprint : MonoBehaviour
     private Rigidbody rb;
     private bool isSprinting = false;
     [SerializeField] private Transform cam;
-    private DestinySword skill1;
 
     void Start()
     {
@@ -37,9 +38,9 @@ public class PlayerMoveAndSprint : MonoBehaviour
 
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
-        Vector3 move = new Vector3(inputM.x, 0, inputM.y) * currentSpeed;
+        /*Vector3 move = new Vector3(inputM.x, 0, inputM.y) * currentSpeed;
 
-        /*Vector3 velocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
+        Vector3 velocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
 
         rb.linearVelocity = velocity;*/
         rb.MovePosition(rb.position + transform.forward * inputM.y * currentSpeed * Time.fixedDeltaTime);
