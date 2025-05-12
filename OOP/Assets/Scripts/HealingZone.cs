@@ -11,7 +11,7 @@ public class HealingZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("MainPlayer"))
         {
             player = other.GetComponent<Player>();
             healTimer = 0f;
@@ -27,6 +27,7 @@ public class HealingZone : MonoBehaviour
             if (healTimer >= healInterval)
             {
                 player._lifeSystem.Heal(healAmount);
+                player.OnSpendLife?.Invoke(player._lifeSystem.CurrentValue);
                 healTimer = 0f;
                  Debug.Log("Curando al jugador"); 
             }
@@ -35,7 +36,7 @@ public class HealingZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("MainPlayer"))
         {
             player = null;
              Debug.Log("Jugador salio de la zona de curacion");

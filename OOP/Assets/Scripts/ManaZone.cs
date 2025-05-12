@@ -12,7 +12,7 @@ public class ManaZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("MainPlayer"))
         {
             player = other.GetComponent<Player>();
             manaTimer = 0f;
@@ -26,19 +26,21 @@ public class ManaZone : MonoBehaviour
             manaTimer += Time.deltaTime;
 
             if (rechargeType == ManaState.time || manaTimer >= manaInterval)
-            Debug.Log("Maná actual del jugador: " + player._manaSystem.CurrentValue);
             {
                 player._manaSystem.Recharge(rechargeType, manaAmount);
+                player.OnSpendMana?.Invoke(player._manaSystem.CurrentValue);
 
                 if (rechargeType == ManaState.instant)
                     manaTimer = 0f; 
+                
+                Debug.Log("Maná actual del jugador: " + player._manaSystem.CurrentValue);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("MainPlayer"))
         {
             player = null;
             Debug.Log("Jugador salio de la zona de mana");
