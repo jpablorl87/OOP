@@ -15,6 +15,7 @@ public class Dummy1 : Player
     public void TakeDamage(float damage)
     {
         lyfe -= damage;
+        Debug.Log(lyfe);
         if (lyfe <= 0)
         {
             DummyDead();

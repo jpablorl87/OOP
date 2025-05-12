@@ -6,7 +6,7 @@ public class AreaDamage : MonoBehaviour
 {
     [SerializeField] private float damage;
     [SerializeField] private float damageDuration;
-    private LayerMask enemy;
+    [SerializeField] private LayerMask enemy;
     private List<Dummy1> damagedEnemies;
     public void Initialize(float amount, float time)
     {

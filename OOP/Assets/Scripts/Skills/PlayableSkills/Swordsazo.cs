@@ -4,7 +4,7 @@ public class Swordsazo : Skill
 {
     [SerializeField] private float swordDamage;
     [SerializeField] private float swordRange;
-    private LayerMask dummy;
+    [SerializeField] private LayerMask dummy;
     public override void Execute(GameObject player, Player playerClass)
     {
         if (!isReady) return;//Verify if it's ready to use the skill
@@ -13,7 +13,7 @@ public class Swordsazo : Skill
         if (player != null)
         {
             RaycastHit hit;//Create a raycast forward
-            Vector3 source = player.transform.position + Vector3.up * 1;
+            Vector3 source = player.transform.position + Vector3.up * 0.5f;
             Vector3 attackDirection = player.transform.forward;
             if (Physics.Raycast(source, attackDirection, out hit, swordRange, dummy))
             {
