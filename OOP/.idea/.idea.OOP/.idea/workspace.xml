@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c8540237-4fc5-4a1f-8cb9-f074065420c3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OOP/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OOP/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerInput.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerInput2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Skills/Basic Dash.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Skills/Basic Dash.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AutoHealing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AutoHealing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AutoShield.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AutoShield.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DestinySword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DestinySword.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/IntermediateSkillSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IntermediateSkillSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ManaSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ManaSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WeakenArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WeakenArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayerInput.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayerInput.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayerInput2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayerInput2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HealingZone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HealingZone.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
