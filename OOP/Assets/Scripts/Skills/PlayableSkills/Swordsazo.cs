@@ -8,6 +8,8 @@ public class Swordsazo : Skill
     public override void Execute(GameObject player, Player playerClass)
     {
         if (!isReady) return;//Verify if it's ready to use the skill
+        
+        StartCooldown();
         if (player != null)
         {
             RaycastHit hit;//Create a raycast forward
@@ -21,6 +23,8 @@ public class Swordsazo : Skill
                     dummyHealth.TakeDamage(swordDamage);
                 }
             }
+            
+            //currentCooldown = coolDown;
         }
     }
 }

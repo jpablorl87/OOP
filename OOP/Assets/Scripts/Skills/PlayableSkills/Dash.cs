@@ -8,7 +8,7 @@ public class Dash : Skill
     public override void Execute(GameObject player, Player playerClass)
     {
         if (!isReady) return;
-        
+        StartCooldown();
             Rigidbody rb = player.GetComponent<Rigidbody>();
             if (rb != null) 
             {
@@ -17,7 +17,7 @@ public class Dash : Skill
                 Vector3 direction = player.transform.forward;
                 rb.AddForce(direction * dashForce, ForceMode.Impulse);
 
-                currentCooldown = coolDown; // Set the cooldown time
+                 
             
             }  
        

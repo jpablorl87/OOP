@@ -15,7 +15,7 @@ public class IntermediateSkillSystem : MonoBehaviour
 
     [SerializeField] private List<SkillSlot> skills = new List<SkillSlot>();
 
-    [Header("Configuración de Jugadores")]
+    [Header("Configuraciï¿½n de Jugadores")]
     //[SerializeField] private bool testingMode;
     [SerializeField] private Player currentPlayer;
 
@@ -54,7 +54,7 @@ public class IntermediateSkillSystem : MonoBehaviour
     {
         if (currentSkill != null || !slot.skill.isReady) return;
 
-        // Verificación de costos específica para cada jugador
+        // Verificaciï¿½n de costos especï¿½fica para cada jugador
         bool canUseSkill = false;
 
         if (currentPlayer is HealthCostPlayer)
@@ -76,7 +76,8 @@ public class IntermediateSkillSystem : MonoBehaviour
             currentSkill = slot.skill;
             currentPlayer.ApplySkillCost(slot.skill.cost);
             slot.skill.Execute(currentPlayer.gameObject, currentPlayer);
-            currentPlayer.NotifySkillUsed(slot.skill.coolDown, slot.uiIcon);
+            Debug.Log($"Invocando cooldown en icon: {slot.uiIcon?.name ?? "NULL"}");
+            currentPlayer.NotifySkillUsed(slot.skill.CurrentCooldown, slot.uiIcon);
             currentSkill.OnCompleted += ResetCurrentSkill;
         }
     }
@@ -86,6 +87,7 @@ public class IntermediateSkillSystem : MonoBehaviour
     {
         currentSkill.OnCompleted -= ResetCurrentSkill;
         currentSkill = null;
+        Debug.Log("Habilidad lista para usarse de nuevo");
     }
 
     private void Update()

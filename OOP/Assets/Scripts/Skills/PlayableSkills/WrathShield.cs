@@ -1,23 +1,31 @@
 using System.Collections;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "New WrathShield", menuName = "Skills/WrathShield")]
 public class WrathShield : Skill
 {
-    [SerializeField] private GameObject prefabShield;//Prefab of the shield
-    [SerializeField] private float shieldDuration;//Time of duration of the shield
+    [SerializeField] private GameObject prefabShield;
+    [SerializeField] private float shieldDuration;
+
     public override void Execute(GameObject player, Player playerClass)
     {
-        if (!isReady) return;//Verify if it's ready to use the skill
-        if (player != null || prefabShield != null)
-        {
-            player.GetComponent<MonoBehaviour>().StartCoroutine(UseShield(player));//Apply the courutine
-        }
+        if (!isReady || prefabShield == null || player == null) 
+            return;
+
+        // Iniciar corrutina una sola vez
+        playerClass.StartCoroutine(UseShield(player));
+        StartCooldown();
+        //currentCooldown = coolDown;
     }
+
     private IEnumerator UseShield(GameObject player)
     {
-        Vector3 playerPosition = player.transform.localPosition;//Vector of the position of the player
-        GameObject skillInstance = Object.Instantiate(prefabShield, playerPosition, Quaternion.identity);//Instantiate the shield
-        yield return new WaitForSeconds(shieldDuration);//Duration of the shield
-        Object.Destroy(skillInstance);//Finaly, destroy the shield after the duration
+        // Usar posición global
+        Vector3 playerPosition = player.transform.position;
+        GameObject skillInstance = Instantiate(prefabShield, playerPosition, Quaternion.identity);
+        
+        yield return new WaitForSeconds(shieldDuration);
+        
+        Destroy(skillInstance);
     }
 }

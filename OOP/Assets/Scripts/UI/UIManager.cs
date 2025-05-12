@@ -23,13 +23,13 @@ public class UIManager : MonoBehaviour
             // Verificar tipo concreto
             if (currentPlayer == null)
             {
-                Debug.LogError("El jugador no tiene un componente Player válido");
+                Debug.LogError("El jugador no tiene un componente Player vï¿½lido");
                 return;
             }
         }
 
         InitializeUI();
-        SetupEventListeners(); // Nueva función
+        SetupEventListeners(); // Nueva funciï¿½n
     }
 
     private void InitializeUI()
@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateSkillView(float cooldownTime, Image targetIcon)
     {
+        Debug.Log($"iniciando cooldown de {cooldownTime} segundos en {targetIcon.name}");
         if (targetIcon != null && cooldownTime > 0)
         {
             StartCoroutine(SkillCooldownRoutine(targetIcon, cooldownTime));

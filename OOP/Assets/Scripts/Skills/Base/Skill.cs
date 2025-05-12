@@ -10,10 +10,13 @@ public abstract class Skill : ScriptableObject
     [SerializeField] protected Sprite icon;
     [SerializeField] public float coolDown;
     [SerializeField] public int cost;
-
     protected float currentCooldown;
+
+    public float CurrentCooldown => currentCooldown;
     public Sprite Icon => icon;
-    public bool isReady => currentCooldown <= 0;
+    public bool isReady => CurrentCooldown <= 0;
+    
+    protected void RiseOnCompleted() => OnCompleted?.Invoke();
 
     public abstract void Execute(GameObject player, Player playerClass);//Metodo abstracto que se implementa en cada habilidad
 
@@ -22,9 +25,10 @@ public abstract class Skill : ScriptableObject
         UpdateCooldown();
     }
 
-    protected void StartCooldown()
+    public void StartCooldown()
     {
         currentCooldown = coolDown;
+        
     }
 
     private void UpdateCooldown()
@@ -32,7 +36,10 @@ public abstract class Skill : ScriptableObject
         if (currentCooldown > 0)
         {
             currentCooldown -= Time.deltaTime;
-            if (currentCooldown <= 0) OnCompleted?.Invoke();
+            if (currentCooldown <= 0)
+            {
+                RiseOnCompleted();
+            }
         }
     }
 }
