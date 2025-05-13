@@ -17,5 +17,10 @@ MonoBehaviour:
   coolDown: 5
   cost: 15
   fartZone: {fileID: 3152709605989395479, guid: 7c66315506407454588ef39712d9ac98, type: 3}
-  fartDuration: 5
+  fartDuration: 2
+  fartRadius: 3
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 8
   fartDamage: 10
+  extraVFX: {fileID: 3167750456873131182, guid: 8b1988aca1a7d834e8a2a9e2b86bb5e7, type: 3}
