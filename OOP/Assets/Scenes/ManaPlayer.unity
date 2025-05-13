@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: manaBar
       value: 
       objectReference: {fileID: 282750121}
+    - target: {fileID: 1029013575814621465, guid: 993602bb0fb6ac8429f2e35e23095bb6, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1254310480}
     - target: {fileID: 2216775563658487090, guid: 993602bb0fb6ac8429f2e35e23095bb6, type: 3}
       propertyPath: cam
       value: 
