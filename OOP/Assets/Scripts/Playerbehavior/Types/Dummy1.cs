@@ -4,6 +4,7 @@ public class Dummy1 : Player
 {
     public float maxLyfe;
     private float lyfe;
+    private DummySpawner spawner;
     public override void ApplySkillCost(int cost)
     {
         throw new System.NotImplementedException();
@@ -24,5 +25,16 @@ public class Dummy1 : Player
     public void DummyDead()
     {
         Destroy(gameObject);
+    }
+    internal void Prepare(DummySpawner _spawner)
+    {
+        spawner = _spawner;
+    }
+    private void OnDestroy()
+    {
+        if (spawner != null)
+        {
+            spawner.Destroyed();
+        }
     }
 }
