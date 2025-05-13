@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // Buscar por tag en lugar de por tipo
+        // Buscar por tag al jugador
         GameObject playerObj = GameObject.FindGameObjectWithTag("MainPlayer");
 
         if (playerObj != null)
@@ -23,13 +23,13 @@ public class UIManager : MonoBehaviour
             // Verificar tipo concreto
             if (currentPlayer == null)
             {
-                Debug.LogError("El jugador no tiene un componente Player v�lido");
+                Debug.LogError("El jugador no tiene un componente Player valido");
                 return;
             }
         }
 
         InitializeUI();
-        SetupEventListeners(); // Nueva funci�n
+        SetupEventListeners();
     }
 
     private void InitializeUI()
