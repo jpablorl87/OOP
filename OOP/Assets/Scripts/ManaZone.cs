@@ -25,15 +25,20 @@ public class ManaZone : MonoBehaviour
         {
             manaTimer += Time.deltaTime;
 
-            if (rechargeType == ManaState.time || manaTimer >= manaInterval)
+            switch (rechargeType)
             {
-                player._manaSystem.Recharge(rechargeType, manaAmount);
-                player.OnSpendMana?.Invoke(player._manaSystem.CurrentValue);
-
-                if (rechargeType == ManaState.instant)
-                    manaTimer = 0f; 
-                
-                Debug.Log("Maná actual del jugador: " + player._manaSystem.CurrentValue);
+                case ManaState.time:
+                    if (manaTimer >= manaInterval)
+                    {
+                        player._manaSystem.Recharge(manaAmount);
+                        player.OnSpendMana?.Invoke(player._manaSystem.CurrentValue);
+                        manaTimer = 0f;
+                    }
+                    break;
+                case ManaState.instant:
+                    player._manaSystem.Recharge(manaAmount);
+                    player.OnSpendMana?.Invoke(player._manaSystem.CurrentValue);
+                    break;
             }
         }
     }

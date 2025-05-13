@@ -17,24 +17,17 @@ public class ManaSystem : Statistics
         this.currentMana = currentValue;
     }
 
-    public float CurrentMana { get => currentMana;}
+    public float CurrentMana => CurrentValue;
 
-    public void Recharge(ManaState state, float amount) 
+    public void Recharge(float amount) 
     {
-        if (state == regenCondition)
-        {
-            ModifyValue(amount * speedRecharge); //multiply the amount by the speed of recharge
-        }
-        else 
-        {
-            ModifyValue(amount); //just modify the value
-        }
+        ModifyValue(amount);
     }
 
     public void SpendMana(int value) 
     {
         Debug.Log($"[manaDebugger] Spend mana 1 : {value}");
-        currentMana -= value; //subtract the value from the current mana
-        Debug.Log($"[manaDebugger] spend mana 2 : {currentMana}");
+        ModifyValue(-value);
+        Debug.Log($"[manaDebugger] spend mana 2 : {CurrentValue}");
     }
 }

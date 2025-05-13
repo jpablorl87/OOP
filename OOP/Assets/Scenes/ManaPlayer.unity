@@ -328,6 +328,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1139450221047839140, guid: 3af26291b9fb3d24a888d3cacf7afec0, type: 3}
+      propertyPath: rechargeType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2826452032285049309, guid: 3af26291b9fb3d24a888d3cacf7afec0, type: 3}
       propertyPath: m_Name
       value: ManaZone
