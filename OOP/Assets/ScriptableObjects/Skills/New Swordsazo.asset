@@ -21,3 +21,4 @@ MonoBehaviour:
   dummy:
     serializedVersion: 2
     m_Bits: 8
+  vfxSword: {fileID: 2868315186213281304, guid: 6522e74a6e50ed1488c608a6bf7b4f49, type: 3}

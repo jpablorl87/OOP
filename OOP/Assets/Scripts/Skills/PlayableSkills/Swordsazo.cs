@@ -5,6 +5,7 @@ public class Swordsazo : Skill
     [SerializeField] private float swordDamage;
     [SerializeField] private float swordRange;
     [SerializeField] private LayerMask dummy;
+    [SerializeField] private ParticleSystem vfxSword;
     public override void Execute(GameObject player, Player playerClass)
     {
         if (!isReady) return;//Verify if it's ready to use the skill
@@ -14,6 +15,7 @@ public class Swordsazo : Skill
         {
             RaycastHit hit;//Create a raycast forward
             Vector3 source = player.transform.position + Vector3.up * 0.5f;
+            Vector3 particlePosition = player.transform.position + Vector3.forward * 0.5f;
             Vector3 attackDirection = player.transform.forward;
             if (Physics.Raycast(source, attackDirection, out hit, swordRange, dummy))
             {
@@ -23,7 +25,11 @@ public class Swordsazo : Skill
                     dummyHealth.TakeDamage(swordDamage);
                 }
             }
-            
+            if (vfxSword != null)
+            {
+                Instantiate(vfxSword, particlePosition, Quaternion.identity).Play();
+                
+            }
             //currentCooldown = coolDown;
         }
     }
