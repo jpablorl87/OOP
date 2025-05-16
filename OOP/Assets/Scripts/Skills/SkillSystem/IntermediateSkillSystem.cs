@@ -17,14 +17,19 @@ public class IntermediateSkillSystem : MonoBehaviour
 
     [Header("Configuraci�n de Jugadores")]
     //[SerializeField] private bool testingMode;
-    [SerializeField] private Player currentPlayer;
+
+    private Player currentPlayer;
 
     //private Player player;
     private Skill currentSkill;
 
+    private void Awake()
+    {
+        currentPlayer = GetComponent<Player>();
+    }
+
     private void Start()
     {
-        DetectCurrentPlayer();
         SetupSkillInputs();
     }
 
@@ -38,16 +43,6 @@ public class IntermediateSkillSystem : MonoBehaviour
                 slot.inputAction.action.Enable();
             }
         }
-    }
-
-
-    /// Detecta el jugador actual en la escena
-    private void DetectCurrentPlayer()
-    {
-        currentPlayer = Object.FindFirstObjectByType<ManaCostPlayer>() ?? (Player)FindFirstObjectByType<HealthCostPlayer>();
-
-        if (currentPlayer == null)
-            Debug.LogError("Agrega un jugador a la escena");
     }
 
     private void TryUseSkill(SkillSlot slot)

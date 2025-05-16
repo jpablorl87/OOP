@@ -4,54 +4,51 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-
     [Header("UI Elements")]
     [SerializeField] private Image lifeBar;
     [SerializeField] private Image manaBar;
 
     private Player currentPlayer;
 
-    private void Start()
+    private void Awake()
     {
-        // Buscar por tag al jugador
-        GameObject playerObj = GameObject.FindGameObjectWithTag("MainPlayer");
-
-        if (playerObj != null)
-        {
-            currentPlayer = playerObj.GetComponent<Player>();
-
-            // Verificar tipo concreto
-            if (currentPlayer == null)
-            {
-                Debug.LogError("El jugador no tiene un componente Player valido");
-                return;
-            }
-        }
+        currentPlayer = GetComponent<Player>();
 
         InitializeUI();
         SetupEventListeners();
     }
 
+    private void OnDestroy()
+    {
+        ReleaseEventListeners();
+    }
+
     private void InitializeUI()
     {
         if (currentPlayer == null) return;
+
         lifeBar.fillAmount = currentPlayer.GetlifePercentage();
         manaBar.fillAmount = currentPlayer.GetManaPercentage();
     }
 
     private void SetupEventListeners()
     {
-        if (currentPlayer == null) return;
-
-        // Limpiar suscripciones previas
-        currentPlayer.OnSpendMana -= UpdateManaView;
-        currentPlayer.OnSpendLife -= UpdateLifeView;
-        currentPlayer.OnUseSkill -= UpdateSkillView;
+        if (!currentPlayer) return;
 
         // Suscribir eventos
         currentPlayer.OnSpendMana += UpdateManaView;
         currentPlayer.OnSpendLife += UpdateLifeView;
         currentPlayer.OnUseSkill += UpdateSkillView;
+    }
+
+    private void ReleaseEventListeners()
+    {
+        if (!currentPlayer) return;
+
+        // Limpiar suscripciones previas
+        currentPlayer.OnSpendMana -= UpdateManaView;
+        currentPlayer.OnSpendLife -= UpdateLifeView;
+        currentPlayer.OnUseSkill -= UpdateSkillView;
     }
 
     private void UpdateManaView(float amount)

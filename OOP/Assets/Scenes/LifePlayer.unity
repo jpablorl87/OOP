@@ -1031,16 +1031,32 @@ PrefabInstance:
       objectReference: {fileID: 1254310481}
     - target: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Bjorn
       objectReference: {fileID: 0}
-    - target: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-      propertyPath: m_TagString
-      value: MainPlayer
-      objectReference: {fileID: 0}
+    - target: {fileID: 4084748494930493034, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: skills.Array.data[0].uiIcon
+      value: 
+      objectReference: {fileID: 1689781246}
+    - target: {fileID: 4084748494930493034, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: skills.Array.data[1].uiIcon
+      value: 
+      objectReference: {fileID: 1689781249}
+    - target: {fileID: 4084748494930493034, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: skills.Array.data[2].uiIcon
+      value: 
+      objectReference: {fileID: 1689781250}
+    - target: {fileID: 4084748494930493034, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: skills.Array.data[3].uiIcon
+      value: 
+      objectReference: {fileID: 1689781251}
+    - target: {fileID: 4393847524049627920, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: lifeBar
+      value: 
+      objectReference: {fileID: 1689781248}
+    - target: {fileID: 4393847524049627920, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
+      propertyPath: manaBar
+      value: 
+      objectReference: {fileID: 1689781247}
     - target: {fileID: 8742819669706282616, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1084,74 +1100,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5229765688578762971}
-    - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5229765688578762980}
-    - targetCorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5229765688578762981}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
---- !u!1 &5229765688578762970 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3568121610402557774, guid: 1cc98417ce171ed41b2aa59de0c72691, type: 3}
-  m_PrefabInstance: {fileID: 5229765688578762969}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5229765688578762971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229765688578762970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f216da5e56c4b44abda024c40efa49a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills:
-  - inputAction: {fileID: 8349483441600370829, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    skill: {fileID: 11400000, guid: eece12ba9f294a04b92e12a95961b7fa, type: 2}
-    uiIcon: {fileID: 1689781246}
-  - inputAction: {fileID: 6749873904194901937, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    skill: {fileID: 11400000, guid: 490bd760bd354c9419038fd908a8649b, type: 2}
-    uiIcon: {fileID: 1689781249}
-  - inputAction: {fileID: -4940858469688941310, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    skill: {fileID: 11400000, guid: e72d888d6f2a100419aace13131442e4, type: 2}
-    uiIcon: {fileID: 1689781250}
-  - inputAction: {fileID: 6804556986510644052, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    skill: {fileID: 11400000, guid: 207d43a2f1cd3284c9913136bab4805a, type: 2}
-    uiIcon: {fileID: 1689781251}
-  currentPlayer: {fileID: 0}
---- !u!114 &5229765688578762980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229765688578762970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9712e6a335d667e49b6757be2d7f0c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5229765688578762981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229765688578762970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075e3e7e72673f14ebc3314b60e20531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeBar: {fileID: 1689781248}
-  manaBar: {fileID: 1689781247}
 --- !u!1001 &7270314987613825300
 PrefabInstance:
   m_ObjectHideFlags: 0

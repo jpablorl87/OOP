@@ -13,22 +13,22 @@ public class Swordsazo : Skill
         StartCooldown();
         if (player != null)
         {
-            RaycastHit hit;//Create a raycast forward
-            Vector3 source = player.transform.position + Vector3.up * 0.5f;
-            Vector3 particlePosition = player.transform.position + Vector3.forward * 0.5f;
-            Vector3 attackDirection = player.transform.forward;
-            if (Physics.Raycast(source, attackDirection, out hit, swordRange, dummy))
+            Collider[] hitColliders = Physics.OverlapSphere(player.transform.position, swordRange, dummy);
+
+            foreach (Collider collider in hitColliders)
             {
-                Dummy1 dummyHealth = hit.collider.GetComponent<Dummy1>();
-                if (dummyHealth != null)
+                if (collider.TryGetComponent(out Dummy1 dummyHealth))
                 {
                     dummyHealth.TakeDamage(swordDamage);
                 }
             }
+
             if (vfxSword != null)
             {
-                Instantiate(vfxSword, particlePosition, Quaternion.identity).Play();
-                
+                ParticleSystem particle = Instantiate(vfxSword, player.transform.position, Quaternion.identity);
+                particle.transform.forward = player.transform.up;
+
+                Destroy(particle, particle.main.duration);
             }
             //currentCooldown = coolDown;
         }
