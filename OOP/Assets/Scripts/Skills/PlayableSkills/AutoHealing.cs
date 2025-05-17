@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+[CreateAssetMenu(fileName = "New Healing", menuName = "Skills/AutoHealing")]
 public class AutoHealing : Skill
 {
-    private float life;
-    private float mana;
-    private float recharge;
-    private float cost;
+    [SerializeField] private float healQuantity;
+    [SerializeField] private float healInt;
+    [SerializeField] private float healTimer;
 
     public override void Execute(GameObject player, Player playerClass)
-    {
-        throw new System.NotImplementedException();
-    }
+    { 
+        if (!isReady) return;//Verify if it's ready to use the skill
+        StartCooldown();
+        if (player != null)
+        {
+            healTimer += Time.deltaTime;
 
-    //After a key is pressed, we heal an amount of health
-    public void Healing()
-    {
-        life += recharge;
-        mana -= cost;
+                playerClass._lifeSystem.Heal(healQuantity);
+                playerClass.OnSpendLife?.Invoke(playerClass._lifeSystem.CurrentValue);
+                healTimer = 0f;
+                Debug.Log("Curando");
+        }
     }
 }

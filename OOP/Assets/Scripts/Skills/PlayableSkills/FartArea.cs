@@ -35,10 +35,12 @@ public class FartArea : Skill
         {
             Debug.LogError("no has asignado el prefab fartZone");
         }
-        
+
         if (extraVFX != null)//Inicializa las particulas
-            Instantiate(extraVFX, spawnPoint, Quaternion.identity).Play();
-        
+        {
+            ParticleSystem particle = Instantiate(extraVFX, spawnPoint, Quaternion.identity);
+            Destroy(particle, particle.main.duration);
+        }
         Collider[] hits = Physics.OverlapSphere(spawnPoint, fartRadius, enemyMask);
         int count = 0;
         foreach (var col in hits)
