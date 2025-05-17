@@ -10,11 +10,9 @@ public class ManaSystem : Statistics
 {
     [SerializeField] private ManaState regenCondition;
     [SerializeField] private float speedRecharge = 1;
-    private float currentMana ;
     public ManaSystem(float maxValue, float minValue, float currentValue, float speedRecharge) : base(maxValue, minValue, currentValue)
     {
         this.speedRecharge = speedRecharge;
-        this.currentMana = currentValue;
     }
 
     public float CurrentMana => CurrentValue;

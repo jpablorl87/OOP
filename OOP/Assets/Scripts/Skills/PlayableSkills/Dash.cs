@@ -16,11 +16,6 @@ public class Dash : Skill
                 Debug.Log("[manaDebugger] Execute called");
                 Vector3 direction = player.transform.forward;
                 rb.AddForce(direction * dashForce, ForceMode.Impulse);
-
-                 
-            
             }  
-       
-            
     }
 }

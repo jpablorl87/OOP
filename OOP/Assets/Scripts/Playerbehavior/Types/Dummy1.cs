@@ -26,7 +26,7 @@ public class Dummy1 : Player
     {
         Destroy(gameObject);
     }
-    internal void Prepare(DummySpawner _spawner)
+    public void Prepare(DummySpawner _spawner)
     {
         spawner = _spawner;
     }

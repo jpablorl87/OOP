@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c8540237-4fc5-4a1f-8cb9-f074065420c3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OOP/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OOP/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Skills/New Fart.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Skills/New Fart.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Playerbehavior/Types/Dummy1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Playerbehavior/Types/Dummy1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/PlayableSkills/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/PlayableSkills/Dash.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/PlayableSkills/FartArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/PlayableSkills/FartArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/IntermediateSkillSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/IntermediateSkillSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stats/Systems/ManaSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stats/Systems/ManaSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,7 @@
       <workItem from="1746819399163" duration="1093000" />
       <workItem from="1746820863039" duration="5524000" />
       <workItem from="1747128106272" duration="2359000" />
+      <workItem from="1747495107144" duration="3557000" />
     </task>
     <servers />
   </component>

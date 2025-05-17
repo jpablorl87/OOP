@@ -4,18 +4,18 @@ using UnityEngine;
 public class FartArea : Skill
 {
     [Header("Settings")]
-    public GameObject fartZone;           
-    public float fartDuration = 2f;       
-    public float fartRadius   = 3f;       
-    public LayerMask enemyMask; 
+    [SerializeField]private GameObject fartZone;           
+    [SerializeField]private float fartDuration = 2f;       
+    [SerializeField]private float fartRadius   = 3f;       
+    [SerializeField]private LayerMask enemyMask; 
     [SerializeField] private float spawnDistance = 6;
     [SerializeField] private float spawnHeight = 2;
 
     [Header("Damage Settings")]
-    public float fartDamage = 10f;        
+    [SerializeField]private float fartDamage = 10f;        
 
     [Header("Feedback")]
-    public ParticleSystem extraVFX;       
+    [SerializeField]private ParticleSystem extraVFX;       
 
     public override void Execute(GameObject player, Player playerClass)
     {

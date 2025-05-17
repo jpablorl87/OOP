@@ -16,11 +16,8 @@ public class IntermediateSkillSystem : MonoBehaviour
     [SerializeField] private List<SkillSlot> skills = new List<SkillSlot>();
 
     [Header("Configuraci�n de Jugadores")]
-    //[SerializeField] private bool testingMode;
 
     private Player currentPlayer;
-
-    //private Player player;
     private Skill currentSkill;
 
     private void Awake()
